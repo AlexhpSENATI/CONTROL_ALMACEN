@@ -7,8 +7,8 @@ import androidx.room.Query
 @Dao
 interface UsuarioDao {
     @Insert
-    suspend fun insertarUsuario(usuario: Usuario)
+    suspend fun insert(user: Usuario)
 
-    @Query("SELECT * FROM usuarios WHERE correo = :correo AND contraseña = :contraseña LIMIT 1")
-    suspend fun iniciarSesion(correo: String, contraseña: String): Usuario?
+    @Query("SELECT * FROM usuarios WHERE email = :email AND password = :password")
+    suspend fun login(email: String, password: String): Usuario?
 }
