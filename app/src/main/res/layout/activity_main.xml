@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
 
     <ImageView
@@ -22,17 +22,18 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="63dp"
-        android:layout_height="14dp"
-        android:text="TextView"
+        android:layout_width="158dp"
+        android:layout_height="29dp"
+        android:text="Almacén facil  y Digital"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.543" />
+        app:layout_constraintVertical_bias="0.458" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnIniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Iniciar"
@@ -41,5 +42,18 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784" />
+        app:layout_constraintVertical_bias="0.733" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="234dp"
+        android:layout_height="89dp"
+        android:text="Apk desarrollado para el control
+        de productos en un almacen con entradas y salidas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.591" />
 </androidx.constraintlayout.widget.ConstraintLayout>
