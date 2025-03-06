@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.proyectofinalas.R
-import com.example.proyectofinalas.viewmodel.UserViewModel
+import com.example.proyectofinalas.data.UserViewModel
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel: UserViewModel by viewModels()
@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
                 if (user != null) {
                     Toast.makeText(this, "Bienvenido ${user.nombre}", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Contraseña o Usurio incorrecto", Toast.LENGTH_SHORT).show()
                 }
             }
         }

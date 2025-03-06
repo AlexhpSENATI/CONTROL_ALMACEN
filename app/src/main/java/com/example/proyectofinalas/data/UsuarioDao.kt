@@ -9,6 +9,6 @@ interface UsuarioDao {
     @Insert
     suspend fun insert(user: Usuario)
 
-    @Query("SELECT * FROM usuarios WHERE email = :email AND password = :password")
+    @Query("SELECT * FROM usurious WHERE email = :email AND password = :password LIMIT 1")
     suspend fun login(email: String, password: String): Usuario?
 }
