@@ -1,49 +1,47 @@
 package com.example.proyectofinalas.ui
-import kotlinx.coroutines.launch
-import android.annotation.SuppressLint
+
+
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.proyectofinalas.R
 import com.example.proyectofinalas.data.Usuario
-import com.example.proyectofinalas.data.UserViewModel
-import androidx.lifecycle.lifecycleScope
+import com.example.proyectofinalas.data.AppDatabase
+import com.example.proyectofinalas.databinding.ActivityRegisterBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var viewModel: UserViewModel
+
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        val userDao = AppDatabase.getDatabase(this).userDao()
 
-        val nombreEditText = findViewById<EditText>(R.id.etNombre)
-        val emailEditText = findViewById<EditText>(R.id.etEmail)
-        val passwordEditText = findViewById<EditText>(R.id.etPassword)
-        val registerButton = findViewById<Button>(R.id.rbutton)
+        binding.btnRegister.setOnClickListener {
+            val name = binding.etName.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
-        registerButton.setOnClickListener {
-            val nombre = nombreEditText.text.toString().trim()
-            val email = emailEditText.text.toString().trim()
-            val password = passwordEditText.text.toString().trim()
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-            if (nombre.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                val user = Usuario(nombre = nombre, email = email, password = password)
-
-                lifecycleScope.launch {
-                    viewModel.insert(user)
-                    runOnUiThread {
-                        Toast.makeText(this@RegisterActivity, "Usuario registrado", Toast.LENGTH_SHORT).show()
-                        finish()
-                    }
+            CoroutineScope(Dispatchers.IO).launch {
+                val user = Usuario(name = name, email = email, password = password)
+                userDao.insertUser(user)
+                runOnUiThread {
+                    Toast.makeText(this@RegisterActivity, "Registro exitoso", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                    finish()
                 }
-            } else {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
-
