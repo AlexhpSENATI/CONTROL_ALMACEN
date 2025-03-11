@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Primera imagen -->
+    <item>
+        <bitmap android:src="@drawable/google" android:gravity="center"/>
+    </item>
+
+    <!-- Segunda imagen (se sobrepone a la primera) -->
+    <item>
+        <bitmap android:src="@drawable/llamada" android:gravity="right"/>
+    </item>
+</layer-list>
